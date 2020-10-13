@@ -1,17 +1,20 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import express from 'express'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
+import router from './router.js'
 
 const app = express()
 
-// Connect to DB
-mongoose.connect('mongodb+srv://admin:admin@restapi.spcdd.mongodb.net/jadwalin?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }, () => {
-
-  console.log('Connect to database success');
+//connect to db
+mongoose.connect(process.env.MONGODB_URI,
+    {useNewUrlParser: true, useUnifiedTopology: true,}
+).then(() => {
+    console.log('Connect to DB success')
+}).catch(err => {
+    console.log('Connect to failed ' + err)
 })
 
 // Middlewares
@@ -19,11 +22,15 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //routes
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
   res.json({
     message: 'success',
   })
 })
-app.listen('8000', () => {
-  console.log('App listen on port 8000')
+
+app.use('/api', router)
+
+
+app.listen(process.env.PORT, () => {
+  console.log(`App listens to port ${process.env.PORT}`);
 })

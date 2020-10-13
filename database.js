@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const homeworkSchema = mongoose.Schema(
   {
@@ -22,8 +22,8 @@ const homeworkSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const Homework = mongoose.model('Homework', homeworkSchema);
+const Homework = mongoose.model('Homework', homeworkSchema)
 
-export default Homework;
+export default Homework
