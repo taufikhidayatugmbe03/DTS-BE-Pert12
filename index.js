@@ -1,7 +1,18 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import morgan from 'morgan'
 
 const app = express()
+
+// Connect to DB
+mongoose.connect('mongodb+srv://admin:admin@restapi.spcdd.mongodb.net/jadwalin?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }, () => {
+
+  console.log('Connect to database success');
+})
 
 // Middlewares
 app.use(express.json())
