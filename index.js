@@ -4,6 +4,7 @@ dotenv.config()
 import express from 'express'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
+import userRouter from './controllers/UserController.js'
 import router from './router.js'
 
 const app = express()
@@ -29,6 +30,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/api', router)
+app.use('/api/user', userRouter)
 
 
 app.listen(process.env.PORT, () => {
